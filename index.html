@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfólio de Henrique Silva — Desenvolvedor Web de Belém-PA especializado em Front-end e Back-end. Interfaces modernas, rápidas e intuitivas.">
+  <meta name="keywords" content="desenvolvedor web, front-end, back-end, portfólio, Henrique Silva, Belém, Pará, HTML, CSS, JavaScript, Python, SQL">
+  <meta name="author" content="Henrique Silva">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Henrique Silva — Desenvolvedor Web">
+  <meta property="og:description" content="Transformando ideias em experiências digitais modernas, rápidas e intuitivas.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <title>Henrique Silva — Desenvolvedor Web</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#050816',
+            secondary: '#0F172A',
+            neon: '#3B82F6',
+            'neon-light': '#60A5FA',
+            'text-white': '#FFFFFF',
+            'text-gray': '#94A3B8',
+          },
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+        }
+      }
+    }
+  </script>
+  <style>
+    /* ========== BASE ========== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #050816;
+      color: #FFFFFF;
+      overflow-x: hidden;
+      cursor: none;
+    }
+    ::selection { background: rgba(59,130,246,0.3); color: #fff; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #050816; }
+    ::-webkit-scrollbar-thumb { background: #3B82F6; border-radius: 3px; }
+    a { cursor: none; }
+    button { cursor: none; }
+
+    /* ========== SCROLL PROGRESS ========== */
+    #scroll-progress {
+      position: fixed; top: 0; left: 0; height: 3px; z-index: 9999;
+      background: linear-gradient(90deg, #3B82F6, #60A5FA, #93C5FD);
+      width: 0%; transition: width 0.1s linear;
+      box-shadow: 0 0 10px rgba(59,130,246,0.5);
+    }
+
+    /* ========== CUSTOM CURSOR ========== */
+    .cursor-dot {
+      position: fixed; width: 6px; height: 6px; background: #3B82F6;
+      border-radius: 50%; pointer-events: none; z-index: 99999;
+      transform: translate(-50%, -50%); transition: transform 0.1s ease;
+    }
+    .cursor-ring {
+      position: fixed; width: 36px; height: 36px; border: 1.5px solid rgba(59,130,246,0.5);
+      border-radius: 50%; pointer-events: none; z-index: 99998;
+      transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, border-color 0.3s;
+    }
+    .cursor-ring.hover {
+      width: 56px; height: 56px; border-color: rgba(96,165,250,0.8);
+      background: rgba(59,130,246,0.05);
+    }
+
+    /* ========== CODE BACKGROUND ========== */
+    #code-bg {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 0; opacity: 0.1; pointer-events: none;
+    }
+
+    /* ========== PARTICLES ========== */
+    .particle {
+      position: fixed; border-radius: 50%; pointer-events: none; z-index: 1;
+      background: radial-gradient(circle, rgba(59,130,246,0.6), transparent 70%);
+      animation: float-particle linear infinite;
+    }
+    @keyframes float-particle {
+      0% { transform: translateY(100vh) translateX(0) scale(0); opacity: 0; }
+      10% { opacity: 1; transform: translateY(90vh) translateX(10px) scale(1); }
+      90% { opacity: 0.5; }
+      100% { transform: translateY(-10vh) translateX(-20px) scale(0.5); opacity: 0; }
+    }
+
+    /* ========== HEADER ========== */
+    #header {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+      padding: 20px 24px; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #header.scrolled {
+      padding: 14px 24px;
+      background: rgba(5,8,22,0.75);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(59,130,246,0.1);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    }
+    .nav-link {
+      position: relative; color: #94A3B8; font-size: 14px; font-weight: 500;
+      text-decoration: none; padding: 6px 0; transition: color 0.3s;
+    }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
+      background: linear-gradient(90deg, #3B82F6, #60A5FA);
+      border-radius: 1px; transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav-link:hover, .nav-link.active { color: #FFFFFF; }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+    /* ========== MOBILE MENU ========== */
+    .mobile-menu {
+      position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
+      background: rgba(15,23,42,0.95); backdrop-filter: blur(20px);
+      z-index: 1001; transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 100px 32px 32px; border-left: 1px solid rgba(59,130,246,0.1);
+    }
+    .mobile-menu.open { right: 0; }
+    .mobile-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5); z-index: 1000; opacity: 0;
+      pointer-events: none; transition: opacity 0.3s;
+    }
+    .mobile-overlay.open { opacity: 1; pointer-events: all; }
+
+    /* ========== HERO PHOTO ========== */
+    .photo-container {
+      position: relative; width: 280px; height: 280px;
+      perspective: 800px;
+    }
+    .photo-ring {
+      position: absolute; inset: -4px; border-radius: 50%;
+      background: conic-gradient(from 0deg, #3B82F6, #60A5FA, #93C5FD, #3B82F6);
+      animation: ring-rotate 6s linear infinite;
+    }
+    .photo-ring::after {
+      content: ''; position: absolute; inset: 3px; border-radius: 50%;
+      background: #050816;
+    }
+    @keyframes ring-rotate { to { transform: rotate(360deg); } }
+    .photo-glow {
+      position: absolute; inset: -20px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.25), transparent 70%);
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.08); opacity: 0.8; }
+    }
+    .photo-img-wrap {
+      position: relative; width: 100%; height: 100%; border-radius: 50%; overflow: hidden;
+      z-index: 2; transition: transform 0.1s ease-out;
+    }
+    .photo-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: brightness(0.95) contrast(1.05);
+    }
+    .photo-img-wrap::after {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      background: linear-gradient(135deg, rgba(59,130,246,0.1), transparent 50%);
+    }
+    .orbit-dot {
+      position: absolute; width: 8px; height: 8px; border-radius: 50%;
+      background: #3B82F6; z-index: 3;
+      box-shadow: 0 0 12px rgba(59,130,246,0.8);
+    }
+    .orbit-dot:nth-child(1) { animation: orbit1 8s linear infinite; }
+    .orbit-dot:nth-child(2) { animation: orbit2 10s linear infinite; width: 6px; height: 6px; background: #60A5FA; }
+    .orbit-dot:nth-child(3) { animation: orbit3 12s linear infinite; width: 5px; height: 5px; }
+    @keyframes orbit1 {
+      0% { top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(0deg) translateX(160px); }
+      100% { top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(360deg) translateX(160px); }
+    }
+    @keyframes orbit2 {
+      0% { top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(120deg) translateX(170px); }
+      100% { top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(480deg) translateX(170px); }
+    }
+    @keyframes orbit3 {
+      0% { top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(240deg) translateX(155px); }
+      100% { top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(600deg) translateX(155px); }
+    }
+
+    /* ========== TYPING ========== */
+    .typing-cursor {
+      display: inline-block; width: 3px; height: 1.1em; background: #3B82F6;
+      margin-left: 4px; vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    /* ========== GLASS CARD ========== */
+    .glass-card {
+      background: rgba(15,23,42,0.5);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(59,130,246,0.1);
+      border-radius: 16px; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(59,130,246,0.3);
+      box-shadow: 0 0 30px rgba(59,130,246,0.1), 0 8px 32px rgba(0,0,0,0.3);
+      transform: translateY(-4px);
+    }
+
+    /* ========== TECH CARD ========== */
+    .tech-card {
+      background: rgba(15,23,42,0.5);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(59,130,246,0.1);
+      border-radius: 16px; padding: 32px 24px; text-align: center;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .tech-card:hover {
+      border-color: rgba(59,130,246,0.4);
+      box-shadow: 0 0 40px rgba(59,130,246,0.15), 0 8px 32px rgba(0,0,0,0.3);
+      transform: translateY(-8px) scale(1.03) rotate(1deg);
+    }
+    .tech-card:hover .tech-icon { transform: rotate(10deg) scale(1.15); }
+    .tech-icon { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+
+    /* ========== PROJECT CARD ========== */
+    .project-card {
+      position: relative; overflow: hidden;
+      background: rgba(15,23,42,0.5);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(59,130,246,0.1);
+      border-radius: 20px; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .project-card:hover {
+      border-color: rgba(59,130,246,0.3);
+      box-shadow: 0 0 50px rgba(59,130,246,0.12), 0 20px 60px rgba(0,0,0,0.4);
+      transform: translateY(-8px);
+    }
+    .project-card .shine {
+      position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(59,130,246,0.06), transparent);
+      transition: left 0.8s ease;
+      pointer-events: none; z-index: 1;
+    }
+    .project-card:hover .shine { left: 100%; }
+    .project-card img {
+      width: 100%; height: 200px; object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .project-card:hover img { transform: scale(1.05); }
+
+    /* ========== BUTTONS ========== */
+    .btn-primary {
+      position: relative; display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; background: linear-gradient(135deg, #3B82F6, #2563EB);
+      color: #fff; font-size: 14px; font-weight: 600; border: none; border-radius: 12px;
+      text-decoration: none; overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 20px rgba(59,130,246,0.3);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(59,130,246,0.5), 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .btn-primary .ripple {
+      position: absolute; border-radius: 50%; background: rgba(255,255,255,0.3);
+      transform: scale(0); animation: ripple-anim 0.6s linear;
+      pointer-events: none;
+    }
+    @keyframes ripple-anim { to { transform: scale(4); opacity: 0; } }
+
+    .btn-outline {
+      position: relative; display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; background: transparent;
+      color: #60A5FA; font-size: 14px; font-weight: 600;
+      border: 1.5px solid rgba(59,130,246,0.4); border-radius: 12px;
+      text-decoration: none; overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-outline:hover {
+      background: rgba(59,130,246,0.1);
+      border-color: rgba(59,130,246,0.7);
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(59,130,246,0.2);
+      color: #93C5FD;
+    }
+
+    /* ========== SCROLL REVEAL ========== */
+    .reveal {
+      opacity: 0; transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left {
+      opacity: 0; transform: translateX(-40px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right {
+      opacity: 0; transform: translateX(40px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+    .reveal-scale {
+      opacity: 0; transform: scale(0.9);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-scale.visible { opacity: 1; transform: scale(1); }
+    .reveal-blur {
+      opacity: 0; filter: blur(10px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-blur.visible { opacity: 1; filter: blur(0); }
+
+    /* ========== BACK TO TOP ========== */
+    #back-top {
+      position: fixed; bottom: 32px; right: 32px; z-index: 999;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(15,23,42,0.8); backdrop-filter: blur(12px);
+      border: 1px solid rgba(59,130,246,0.3);
+      color: #60A5FA; display: flex; align-items: center; justify-content: center;
+      opacity: 0; transform: translateY(20px); pointer-events: none;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #back-top.visible { opacity: 1; transform: translateY(0); pointer-events: all; }
+    #back-top:hover {
+      background: rgba(59,130,246,0.2);
+      border-color: rgba(59,130,246,0.6);
+      box-shadow: 0 0 20px rgba(59,130,246,0.3);
+      transform: translateY(-3px);
+    }
+
+    /* ========== FLOATING ========== */
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+    .float-anim { animation: float 6s ease-in-out infinite; }
+
+    /* ========== SECTION DIVIDER ========== */
+    .section-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 999px;
+      background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.15);
+      color: #60A5FA; font-size: 12px; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      body { cursor: auto; }
+      .cursor-dot, .cursor-ring { display: none !important; }
+      .photo-container { width: 200px; height: 200px; }
+      @keyframes orbit1 { 0% { transform: translate(-50%,-50%) rotate(0deg) translateX(120px); } 100% { transform: translate(-50%,-50%) rotate(360deg) translateX(120px); } }
+      @keyframes orbit2 { 0% { transform: translate(-50%,-50%) rotate(120deg) translateX(130px); } 100% { transform: translate(-50%,-50%) rotate(480deg) translateX(130px); } }
+      @keyframes orbit3 { 0% { transform: translate(-50%,-50%) rotate(240deg) translateX(115px); } 100% { transform: translate(-50%,-50%) rotate(600deg) translateX(115px); } }
+    }
+  </style>
+</head>
+<body>
+  <!-- Scroll Progress -->
+  <div id="scroll-progress" role="progressbar" aria-label="Progresso de leitura"></div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <!-- Code Background Canvas -->
+  <canvas id="code-bg" aria-hidden="true"></canvas>
+
+  <!-- Particles (generated by JS) -->
+  <div id="particles" aria-hidden="true"></div>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay" id="mobile-overlay"></div>
+
+  <!-- Mobile Menu -->
+  <nav class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Menu mobile">
+    <div class="flex flex-col gap-6">
+      <a href="#inicio" class="text-lg font-medium text-text-gray hover:text-white transition-colors mobile-link">Início</a>
+      <a href="#sobre" class="text-lg font-medium text-text-gray hover:text-white transition-colors mobile-link">Sobre</a>
+      <a href="#tecnologias" class="text-lg font-medium text-text-gray hover:text-white transition-colors mobile-link">Tecnologias</a>
+      <a href="#projetos" class="text-lg font-medium text-text-gray hover:text-white transition-colors mobile-link">Projetos</a>
+      <a href="#contato" class="text-lg font-medium text-text-gray hover:text-white transition-colors mobile-link">Contato</a>
+    </div>
+  </nav>
+
+  <!-- ========== HEADER ========== -->
+  <header id="header" role="banner">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <a href="#inicio" class="text-lg font-bold tracking-tight" aria-label="Henrique Silva - Início">
+        <span class="text-neon">H</span><span class="text-white">enrique</span>
+        <span class="text-text-gray font-light">.dev</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8" role="navigation" aria-label="Menu principal">
+        <a href="#inicio" class="nav-link active" data-section="inicio">Início</a>
+        <a href="#sobre" class="nav-link" data-section="sobre">Sobre</a>
+        <a href="#tecnologias" class="nav-link" data-section="tecnologias">Tecnologias</a>
+        <a href="#projetos" class="nav-link" data-section="projetos">Projetos</a>
+        <a href="#contato" class="nav-link" data-section="contato">Contato</a>
+      </nav>
+      <button class="md:hidden text-white p-2" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+        <span class="iconify" data-icon="mdi:menu" data-width="24"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ========== HERO ========== -->
+    <section id="inicio" class="relative min-h-screen flex items-center pt-24 pb-16 px-6" aria-label="Seção principal">
+      <div class="max-w-7xl mx-auto w-full flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20 relative z-10">
+        <!-- Text -->
+        <div class="flex-1 text-center lg:text-left">
+          <div class="reveal-blur" style="transition-delay:0ms">
+            <span class="section-label mb-6 inline-flex">
+              <span class="w-2 h-2 bg-neon rounded-full animate-pulse"></span>
+              Disponível para projetos
+            </span>
+          </div>
+          <h1 class="reveal-left text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mt-6" style="transition-delay:100ms">
+            Henrique<br><span class="bg-gradient-to-r from-neon to-neon-light bg-clip-text text-transparent">Silva</span>
+          </h1>
+          <div class="reveal-left mt-6 h-8" style="transition-delay:200ms">
+            <span class="text-xl sm:text-2xl text-text-gray font-light">
+              <span id="typing-text"></span><span class="typing-cursor"></span>
+            </span>
+          </div>
+          <p class="reveal-left text-base sm:text-lg text-text-gray font-light leading-relaxed mt-6 max-w-xl mx-auto lg:mx-0" style="transition-delay:300ms">
+            Transformando ideias em experiências digitais modernas, rápidas e intuitivas através de interfaces elegantes e desenvolvimento web de alta qualidade.
+          </p>
+          <div class="reveal-left flex flex-wrap gap-4 mt-10 justify-center lg:justify-start" style="transition-delay:400ms">
+            <a href="#projetos" class="btn-primary interactive">
+              <span>Ver Projetos</span>
+              <span class="iconify" data-icon="mdi:arrow-right" data-width="18"></span>
+            </a>
+            <a href="https://github.com/henrique2904-afk" target="_blank" rel="noopener noreferrer" class="btn-outline interactive">
+              <span class="iconify" data-icon="mdi:github" data-width="20"></span>
+              <span>GitHub</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Photo -->
+        <div class="flex-shrink-0 reveal-right" style="transition-delay:300ms">
+          <div class="photo-container float-anim" id="photo-container">
+            <div class="photo-glow"></div>
+            <div class="photo-ring"></div>
+            <div class="photo-img-wrap" id="photo-tilt">
+              <!-- Substitua o src pela sua foto real -->
+              <img src="https://z-cdn-media.chatglm.cn/files/ee9ef25f-e9eb-447d-bc7a-7c8bc2c88a20.jpeg?auth_key=1882843416-0324f45c455c4f18a81d0fcb1289525a-0-604fefc69df168dac2b0daf69b41e4d2" alt="Foto de Henrique Silva, desenvolvedor web de Belém-PA" width="280" height="280" loading="eager">
+            </div>
+            <div class="orbit-dot"></div>
+            <div class="orbit-dot"></div>
+            <div class="orbit-dot"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 reveal-blur" style="transition-delay:800ms">
+        <span class="text-text-gray text-xs tracking-widest uppercase">Scroll</span>
+        <div class="w-5 h-8 border border-text-gray/30 rounded-full flex justify-center pt-1.5">
+          <div class="w-1 h-2 bg-neon rounded-full animate-bounce"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SOBRE ========== -->
+    <section id="sobre" class="relative py-24 px-6" aria-label="Sobre mim">
+      <div class="max-w-7xl mx-auto relative z-10">
+        <div class="text-center mb-16">
+          <span class="section-label reveal-blur">
+            <span class="iconify" data-icon="mdi:account-outline" data-width="14"></span>
+            Conheça-me
+          </span>
+          <h2 class="reveal text-3xl md:text-5xl font-bold tracking-tight mt-6" style="transition-delay:100ms">
+            Sobre <span class="bg-gradient-to-r from-neon to-neon-light bg-clip-text text-transparent">Mim</span>
+          </h2>
+        </div>
+        <p class="reveal text-text-gray font-light leading-relaxed text-center max-w-3xl mx-auto text-base sm:text-lg" style="transition-delay:200ms">
+          Olá! Sou Henrique Silva, desenvolvedor web residente em Belém - Pará e estudante de Análise e Desenvolvimento de Sistemas.
+          <br class="hidden sm:block"><br class="hidden sm:block">
+          Tenho experiência na criação de sites modernos, responsivos e de alta performance, desenvolvendo interfaces intuitivas e aplicações voltadas para uma excelente experiência do usuário.
+          <br class="hidden sm:block"><br class="hidden sm:block">
+          Estou constantemente aprimorando minhas habilidades, buscando novas tecnologias e boas práticas para entregar soluções cada vez mais completas, seguras e eficientes.
+        </p>
+
+        <!-- Info Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
+          <div class="glass-card p-6 reveal" style="transition-delay:100ms">
+            <div class="w-12 h-12 rounded-xl bg-neon/10 flex items-center justify-center mb-4">
+              <span class="iconify text-neon" data-icon="mdi:map-marker" data-width="24"></span>
+            </div>
+            <p class="text-xs text-text-gray uppercase tracking-wider font-medium mb-1">Localização</p>
+            <p class="text-white font-medium">Belém - PA</p>
+          </div>
+          <div class="glass-card p-6 reveal" style="transition-delay:200ms">
+            <div class="w-12 h-12 rounded-xl bg-neon/10 flex items-center justify-center mb-4">
+              <span class="iconify text-neon" data-icon="mdi:school-outline" data-width="24"></span>
+            </div>
+            <p class="text-xs text-text-gray uppercase tracking-wider font-medium mb-1">Formação</p>
+            <p class="text-white font-medium">Análise e Desenvolvimento de Sistemas</p>
+          </div>
+          <div class="glass-card p-6 reveal" style="transition-delay:300ms">
+            <div class="w-12 h-12 rounded-xl bg-neon/10 flex items-center justify-center mb-4">
+              <span class="iconify text-neon" data-icon="mdi:code-braces" data-width="24"></span>
+            </div>
+            <p class="text-xs text-text-gray uppercase tracking-wider font-medium mb-1">Especialidade</p>
+            <p class="text-white font-medium">Desenvolvimento Web</p>
+          </div>
+          <div class="glass-card p-6 reveal" style="transition-delay:400ms">
+            <div class="w-12 h-12 rounded-xl bg-neon/10 flex items-center justify-center mb-4">
+              <span class="iconify text-neon" data-icon="mdi:earth" data-width="24"></span>
+            </div>
+            <p class="text-xs text-text-gray uppercase tracking-wider font-medium mb-1">Disponibilidade</p>
+            <p class="text-white font-medium">Freelance e oportunidades</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TECNOLOGIAS ========== -->
+    <section id="tecnologias" class="relative py-24 px-6" aria-label="Tecnologias">
+      <div class="max-w-7xl mx-auto relative z-10">
+        <div class="text-center mb-16">
+          <span class="section-label reveal-blur">
+            <span class="iconify" data-icon="mdi:layers-outline" data-width="14"></span>
+            Stack
+          </span>
+          <h2 class="reveal text-3xl md:text-5xl font-bold tracking-tight mt-6" style="transition-delay:100ms">
+            Tecnologia<span class="bg-gradient-to-r from-neon to-neon-light bg-clip-text text-transparent">s</span>
+          </h2>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+          <div class="tech-card reveal-scale interactive" style="transition-delay:100ms">
+            <div class="tech-icon flex justify-center mb-4">
+              <span class="iconify" data-icon="logos:python" data-width="48"></span>
+            </div>
+            <p class="text-white font-medium text-sm">Python</p>
+          </div>
+          <div class="tech-card reveal-scale interactive" style="transition-delay:200ms">
+            <div class="tech-icon flex justify-center mb-4">
+              <span class="iconify" data-icon="logos:html-5" data-width="48"></span>
+            </div>
+            <p class="text-white font-medium text-sm">HTML5</p>
+          </div>
+          <div class="tech-card reveal-scale interactive" style="transition-delay:300ms">
+            <div class="tech-icon flex justify-center mb-4">
+              <span class="iconify" data-icon="logos:css-3" data-width="48"></span>
+            </div>
+            <p class="text-white font-medium text-sm">CSS3</p>
+          </div>
+          <div class="tech-card reveal-scale interactive" style="transition-delay:400ms">
+            <div class="tech-icon flex justify-center mb-4">
+              <span class="iconify" data-icon="logos:javascript" data-width="48"></span>
+            </div>
+            <p class="text-white font-medium text-sm">JavaScript</p>
+          </div>
+          <div class="tech-card reveal-scale interactive" style="transition-delay:500ms">
+            <div class="tech-icon flex justify-center mb-4">
+              <span class="iconify" data-icon="logos:postgresql" data-width="48"></span>
+            </div>
+            <p class="text-white font-medium text-sm">SQL</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PROJETOS ========== -->
+    <section id="projetos" class="relative py-24 px-6" aria-label="Projetos em destaque">
+      <div class="max-w-7xl mx-auto relative z-10">
+        <div class="text-center mb-16">
+          <span class="section-label reveal-blur">
+            <span class="iconify" data-icon="mdi:folder-star-outline" data-width="14"></span>
+            Portfólio
+          </span>
+          <h2 class="reveal text-3xl md:text-5xl font-bold tracking-tight mt-6" style="transition-delay:100ms">
+            Projetos em <span class="bg-gradient-to-r from-neon to-neon-light bg-clip-text text-transparent">Destaque</span>
+          </h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <!-- Projeto 1 -->
+          <article class="project-card reveal-left interactive" style="transition-delay:100ms">
+            <div class="shine"></div>
+            <div class="overflow-hidden rounded-t-[19px]">
+              <img src="https://z-cdn-media.chatglm.cn/files/7e88393d-8587-4e8b-bfcb-e3f1f3257848.jpg?auth_key=1882843416-4350d938c457425a801c69d68a4c241f-0-4f2eceffe68c6e741f4a4db27a90f0b3" alt="Captura de tela do projeto NetCheck mostrando interface de teste de velocidade" width="600" height="200" loading="lazy">
+            </div>
+            <div class="p-6 relative z-2">
+              <h3 class="text-xl font-semibold text-white mb-2">NetCheck</h3>
+              <p class="text-text-gray font-light text-sm leading-relaxed mb-4">Aplicação web para análise e monitoramento de velocidade de conexão, com interface moderna e resultados visuais intuitivos.</p>
+              <div class="flex flex-wrap gap-2 mb-5">
+                <span class="px-3 py-1 text-xs font-medium rounded-full bg-neon/10 text-neon-light border border-neon/20">HTML</span>
+                <span class="px-3 py-1 text-xs font-medium rounded-full bg-neon/10 text-neon-light border border-neon/20">CSS</span>
+                <span class="px-3 py-1 text-xs font-medium rounded-full bg-neon/10 text-neon-light border border-neon/20">JavaScript</span>
+              </div>
+              <a href="https://github.com/henrique2904-afk/netcheck" target="_blank" rel="noopener noreferrer" class="btn-outline text-sm py-3 px-5 interactive">
+                <span class="iconify" data-icon="mdi:open-in-new" data-width="16"></span>
+                Ver Repositório
+              </a>
+            </div>
+          </article>
+
+          <!-- Projeto 2 -->
+          <article class="project-card reveal-right interactive" style="transition-delay:200ms">
+            <div class="shine"></div>
+            <div class="overflow-hidden rounded-t-[19px]">
+              <img src="https://z-cdn-media.chatglm.cn/files/b20f883d-734d-4cb0-a128-c6a5ef87580d.png?auth_key=1882843416-ed026945f3bf4f4ea504cbbee4ad273f-0-57a4f2311580d6c16c22eb088c8daa0e" alt="Captura de tela do projeto de gráficos em Python" width="600" height="200" loading="lazy">
+            </div>
+            <div class="p-6 relative z-2">
+              <h3 class="text-xl font-semibold text-white mb-2">Gráficos em Python</h3>
+              <p class="text-text-gray font-light text-sm leading-relaxed mb-4">Projeto de visualização de dados utilizando Python para gerar gráficos dinâmicos e análises visuais a partir de conjuntos de dados.</p>
+              <div class="flex flex-wrap gap-2 mb-5">
+                <span class="px-3 py-1 text-xs font-medium rounded-full bg-neon/10 text-neon-light border border-neon/20">Python</span>
+                <span class="px-3 py-1 text-xs font-medium rounded-full bg-neon/10 text-neon-light border border-neon/20">SQL</span>
+              </div>
+              <a href="https://github.com/henrique2904-afk/projeto-python/tree/main?files=1" target="_blank" rel="noopener noreferrer" class="btn-outline text-sm py-3 px-5 interactive">
+                <span class="iconify" data-icon="mdi:open-in-new" data-width="16"></span>
+                Ver Repositório
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CONTATO ========== -->
+    <section id="contato" class="relative py-24 px-6" aria-label="Contato">
+      <div class="max-w-3xl mx-auto relative z-10">
+        <div class="text-center mb-16">
+          <span class="section-label reveal-blur">
+            <span class="iconify" data-icon="mdi:message-text-outline" data-width="14"></span>
+            Fale comigo
+          </span>
+          <h2 class="reveal text-3xl md:text-5xl font-bold tracking-tight mt-6" style="transition-delay:100ms">
+            Entre em <span class="bg-gradient-to-r from-neon to-neon-light bg-clip-text text-transparent">Contato</span>
+          </h2>
+        </div>
+        <div class="glass-card p-8 sm:p-10 reveal" style="transition-delay:200ms">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+            <div class="flex items-center gap-4">
+              <div class="w-11 h-11 rounded-xl bg-neon/10 flex items-center justify-center flex-shrink-0">
+                <span class="iconify text-neon" data-icon="mdi:account-outline" data-width="22"></span>
+              </div>
+              <div>
+                <p class="text-xs text-text-gray uppercase tracking-wider font-medium">Nome</p>
+                <p class="text-white font-medium text-sm">Henrique Silva</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="w-11 h-11 rounded-xl bg-neon/10 flex items-center justify-center flex-shrink-0">
+                <span class="iconify text-neon" data-icon="mdi:map-marker-outline" data-width="22"></span>
+              </div>
+              <div>
+                <p class="text-xs text-text-gray uppercase tracking-wider font-medium">Cidade</p>
+                <p class="text-white font-medium text-sm">Belém - PA</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="w-11 h-11 rounded-xl bg-neon/10 flex items-center justify-center flex-shrink-0">
+                <span class="iconify text-neon" data-icon="mdi:github" data-width="22"></span>
+              </div>
+              <div>
+                <p class="text-xs text-text-gray uppercase tracking-wider font-medium">GitHub</p>
+                <a href="https://github.com/henrique2904-afk" target="_blank" rel="noopener noreferrer" class="text-neon-light hover:text-white text-sm font-medium transition-colors interactive">@henrique2904-afk</a>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="w-11 h-11 rounded-xl bg-neon/10 flex items-center justify-center flex-shrink-0">
+                <span class="iconify text-neon" data-icon="mdi:email-outline" data-width="22"></span>
+              </div>
+              <div>
+                <p class="text-xs text-text-gray uppercase tracking-wider font-medium">Email</p>
+                <a href="mailto:hsilv77@gmail.com" class="text-neon-light hover:text-white text-sm font-medium transition-colors interactive">hsilv77@gmail.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <a href="mailto:hsilv77@gmail.com" class="btn-primary text-base py-4 px-10 interactive">
+              <span class="iconify" data-icon="mdi:send" data-width="18"></span>
+              Entrar em Contato
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="relative border-t border-white/5 py-10 px-6" role="contentinfo">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 relative z-10">
+      <p class="text-text-gray text-sm text-center sm:text-left">
+        © 2026 Henrique Silva.<br class="sm:hidden">
+        Desenvolvido com HTML, CSS, JavaScript e muita dedicação.
+      </p>
+      <div class="flex items-center gap-5">
+        <a href="https://github.com/henrique2904-afk" target="_blank" rel="noopener noreferrer" class="text-text-gray hover:text-neon-light transition-all duration-300 hover:-translate-y-1 interactive" aria-label="GitHub">
+          <span class="iconify" data-icon="mdi:github" data-width="22"></span>
+        </a>
+        <!-- Substitua pelo seu link real do LinkedIn -->
+        <a href="https://www.linkedin.com/in/henrique-silva" target="_blank" rel="noopener noreferrer" class="text-text-gray hover:text-neon-light transition-all duration-300 hover:-translate-y-1 interactive" aria-label="LinkedIn">
+          <span class="iconify" data-icon="mdi:linkedin" data-width="22"></span>
+        </a>
+        <a href="mailto:hsilv77@gmail.com" class="text-text-gray hover:text-neon-light transition-all duration-300 hover:-translate-y-1 interactive" aria-label="Email">
+          <span class="iconify" data-icon="mdi:email-outline" data-width="22"></span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button id="back-top" aria-label="Voltar ao topo">
+    <span class="iconify" data-icon="mdi:arrow-up" data-width="22"></span>
+  </button>
+
+  <!-- ========== JAVASCRIPT ========== -->
+  <script>
+  (() => {
+    'use strict';
+
+    /* ===== CUSTOM CURSOR ===== */
+    const dot = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.left = mx+'px'; dot.style.top = my+'px'; });
+
+    function animateRing() {
+      rx += (mx - rx) * 0.15;
+      ry += (my - ry) * 0.15;
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    document.querySelectorAll('a, button, .interactive').forEach(el => {
+      el.addEventListener('mouseenter', () => ring.classList.add('hover'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+    });
+
+    /* ===== SCROLL PROGRESS ===== */
+    const progressBar = document.getElementById('scroll-progress');
+    function updateProgress() {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = (window.scrollY / h * 100) + '%';
+    }
+
+    /* ===== HEADER SCROLL ===== */
+    const header = document.getElementById('header');
+    function updateHeader() {
+      header.classList.toggle('scrolled', window.scrollY > 50);
+    }
+
+    /* ===== ACTIVE NAV LINK ===== */
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link[data-section]');
+    function updateActiveNav() {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 200) current = s.id;
+      });
+      navLinks.forEach(l => l.classList.toggle('active', l.dataset.section === current));
+    }
+
+    /* ===== BACK TO TOP ===== */
+    const backTop = document.getElementById('back-top');
+    function updateBackTop() {
+      backTop.classList.toggle('visible', window.scrollY > 600);
+    }
+    backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    /* ===== SCROLL LISTENERS ===== */
+    window.addEventListener('scroll', () => { updateProgress(); updateHeader(); updateActiveNav(); updateBackTop(); }, { passive: true });
+
+    /* ===== MOBILE MENU ===== */
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileOverlay = document.getElementById('mobile-overlay');
+
+    function openMenu() { mobileMenu.classList.add('open'); mobileOverlay.classList.add('open'); menuToggle.setAttribute('aria-expanded', 'true'); }
+    function closeMenu() { mobileMenu.classList.remove('open'); mobileOverlay.classList.remove('open'); menuToggle.setAttribute('aria-expanded', 'false'); }
+
+    menuToggle.addEventListener('click', () => mobileMenu.classList.contains('open') ? closeMenu() : openMenu());
+    mobileOverlay.addEventListener('click', closeMenu);
+    document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', closeMenu));
+
+    /* ===== TYPING ANIMATION ===== */
+    const phrases = ['Desenvolvedor Web', 'Front-end', 'Back-end', 'Estudante de ADS'];
+    let phraseIdx = 0, charIdx = 0, isDeleting = false;
+    const typingEl = document.getElementById('typing-text');
+
+    function type() {
+      const current = phrases[phraseIdx];
+      typingEl.textContent = isDeleting ? current.substring(0, charIdx--) : current.substring(0, charIdx++);
+
+      let delay = isDeleting ? 40 : 80;
+
+      if (!isDeleting && charIdx > current.length) { delay = 2000; isDeleting = true; }
+      else if (isDeleting && charIdx < 0) { isDeleting = false; phraseIdx = (phraseIdx + 1) % phrases.length; delay = 400; }
+
+      setTimeout(type, delay);
+    }
+    type();
+
+    /* ===== SCROLL REVEAL ===== */
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-blur');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    /* ===== RIPPLE EFFECT ===== */
+    document.querySelectorAll('.btn-primary, .btn-outline').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        ripple.classList.add('ripple');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+        ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+        this.appendChild(ripple);
+        ripple.addEventListener('animationend', () => ripple.remove());
+      });
+    });
+
+    /* ===== PHOTO 3D TILT ===== */
+    const photoContainer = document.getElementById('photo-container');
+    const photoTilt = document.getElementById('photo-tilt');
+
+    if (photoContainer && photoTilt) {
+      photoContainer.addEventListener('mousemove', e => {
+        const rect = photoContainer.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        photoTilt.style.transform = `rotateY(${x * 15}deg) rotateX(${-y * 15}deg)`;
+      });
+      photoContainer.addEventListener('mouseleave', () => {
+        photoTilt.style.transition = 'transform 0.5s ease';
+        photoTilt.style.transform = 'rotateY(0) rotateX(0)';
+        setTimeout(() => photoTilt.style.transition = 'transform 0.1s ease-out', 500);
+      });
+    }
+
+    /* ===== PARTICLES ===== */
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 20; i++) {
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      const size = Math.random() * 4 + 2;
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.animationDuration = (Math.random() * 20 + 15) + 's';
+      p.style.animationDelay = (Math.random() * 15) + 's';
+      particlesContainer.appendChild(p);
+    }
+
+    /* ===== CODE BACKGROUND (CANVAS) ===== */
+    const canvas = document.getElementById('code-bg');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const codeSnippets = [
+      'const app = new Portfolio()',
+      'function createExperience() {',
+      '  renderPortfolio()',
+      '  animate()',
+      '}',
+      'class Developer {',
+      '  constructor(name) {',
+      '    this.name = name',
+      '    this.skills = ["HTML", "CSS", "JS"]',
+      '  }',
+      '  build() { return "Amazing Websites" }',
+      '}',
+      'import { useState, useEffect } from "react"',
+      'const [theme, setTheme] = useState("dark")',
+      'export default function App() {',
+      '  return <Portfolio />',
+      '}',
+      'async function fetchData(url) {',
+      '  const res = await fetch(url)',
+      '  return res.json()',
+      '}',
+      '// Clean code matters',
+      'const styles = {',
+      '  color: "#3B82F6",',
+      '  fontSize: "16px",',
+      '  transition: "all 0.3s ease"',
+      '}',
+      'document.querySelector("#app")',
+      '  .addEventListener("click", handler)',
+      'function optimize() {',
+      '  return performance.now()',
+      '}',
+      'const data = await db.query(',
+      '  "SELECT * FROM projects"',
+      ')',
+      'for (const skill of stack) {',
+      '  skill.levelUp()',
+      '}',
+      'console.log("Hello, World!")',
+      'if (isReady) deploy()',
+      'const config = {',
+      '  darkMode: true,',
+      '  animations: true,',
+      '  responsive: true',
+      '}',
+    ];
+
+    const keywords = new Set(['const','let','var','function','class','return','import','export','default','async','await','new','if','else','for','of','in','from','true','false','null','undefined']);
+    const builtins = new Set(['console','document','window','performance','Math','JSON','Promise','fetch','useState','useEffect']);
+
+    function colorize(line) {
+      let result = '';
+      let i = 0;
+      while (i < line.length) {
+        // Strings
+        if (line[i] === '"' || line[i] === "'" || line[i] === '`') {
+          const q = line[i]; let j = i + 1;
+          while (j < line.length && line[j] !== q) j++;
+          result += `<span style="color:#60A5FA">${line.substring(i, j+1)}</span>`;
+          i = j + 1; continue;
+        }
+        // Comments
+        if (line[i] === '/' && line[i+1] === '/') {
+          result += `<span style="color:#475569">${line.substring(i)}</span>`;
+          break;
+        }
+        // Words
+        if (/[a-zA-Z_$]/.test(line[i])) {
+          let j = i;
+          while (j < line.length && /[a-zA-Z0-9_$]/.test(line[j])) j++;
+          const word = line.substring(i, j);
+          if (keywords.has(word)) result += `<span style="color:#3B82F6">${word}</span>`;
+          else if (builtins.has(word)) result += `<span style="color:#F59E0B">${word}</span>`;
+          else result += `<span style="color:#CBD5E1">${word}</span>`;
+          i = j; continue;
+        }
+        // Numbers
+        if (/[0-9]/.test(line[i])) {
+          let j = i;
+          while (j < line.length && /[0-9.]/.test(line[j])) j++;
+          result += `<span style="color:#F59E0B">${line.substring(i, j)}</span>`;
+          i = j; continue;
+        }
+        // Punctuation
+        result += `<span style="color:#475569">${line[i]}</span>`;
+        i++;
+      }
+      return result;
+    }
+
+    let codeLines = [];
+    let currentLine = '';
+    let currentSnippetIdx = 0;
+    let currentCharIdx = 0;
+    let lastTypeTime = 0;
+    const typeInterval = 60;
+    let scrollOffset = 0;
+
+    function updateCode(timestamp) {
+      if (timestamp - lastTypeTime > typeInterval) {
+        lastTypeTime = timestamp;
+        const snippet = codeSnippets[currentSnippetIdx];
+        if (currentCharIdx <= snippet.length) {
+          currentLine = snippet.substring(0, currentCharIdx);
+          currentCharIdx++;
+        } else {
+          codeLines.push(currentLine);
+          currentLine = '';
+          currentCharIdx = 0;
+          currentSnippetIdx = (currentSnippetIdx + 1) % codeSnippets.length;
+
+          const lineHeight = 20;
+          const maxVisible = Math.ceil(canvas.height / lineHeight) + 2;
+          if (codeLines.length > maxVisible + 10) {
+            codeLines = codeLines.slice(-maxVisible);
+          }
+          scrollOffset = Math.max(0, (codeLines.length - maxVisible + 1) * lineHeight);
+        }
+      }
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.font = '14px "Courier New", monospace';
+
+      const allLines = [...codeLines, currentLine];
+      const lineHeight = 20;
+      const startX = 40;
+      let y = 30 - scrollOffset;
+
+      for (let i = 0; i < allLines.length; i++) {
+        const screenY = y + i * lineHeight;
+        if (screenY < -20 || screenY > canvas.height + 20) continue;
+
+        // Line number
+        ctx.fillStyle = 'rgba(71,85,105,0.5)';
+        ctx.fillText(String(i + 1).padStart(2, ' '), 10, screenY);
+
+        // Code line
+        const colored = colorize(allLines[i]);
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = colored;
+        const spans = tempDiv.querySelectorAll('span');
+        let xPos = startX;
+        spans.forEach(span => {
+          ctx.fillStyle = span.style.color || '#CBD5E1';
+          ctx.fillText(span.textContent, xPos, screenY);
+          xPos += ctx.measureText(span.textContent).width;
+        });
+
+        // Cursor on current typing line
+        if (i === allLines.length - 1 && currentLine.length < codeSnippets[currentSnippetIdx]?.length) {
+          const blinkOn = Math.floor(Date.now() / 530) % 2 === 0;
+          if (blinkOn) {
+            ctx.fillStyle = '#3B82F6';
+            ctx.fillRect(xPos + 1, screenY - 13, 2, 16);
+          }
+        }
+      }
+
+      requestAnimationFrame(updateCode);
+    }
+    requestAnimationFrame(updateCode);
+
+    /* ===== INIT ===== */
+    updateProgress();
+    updateHeader();
+    updateActiveNav();
+    updateBackTop();
+
+  })();
+  </script>
+</body>
+</html>
